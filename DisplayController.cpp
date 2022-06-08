@@ -1,7 +1,28 @@
 #include <stdio.h>
 #include <string>
 #include "DisplayController.h"
+#include "Utils.h"
 
+void DisplayController::readInput()
+{
+    int userInput = 0;
+    scanf("%d", &userInput);
+    switch (userInput)
+    {
+    case 6:
+        clearScreen();
+        this->showAbout();
+        break;
+    default:
+        logger("error", "Invalid input");
+        break;
+    }
+}
+void DisplayController::clearScreen()
+{
+    printf("\033[2J");
+    printf("\033[0;0H");
+}
 void DisplayController::centerPrint(string text)
 {
     int textLength = text.length();
@@ -10,6 +31,7 @@ void DisplayController::centerPrint(string text)
 }
 void DisplayController::showMainMenu()
 {
+    clearScreen();
     printf("█████████████████████████████████████████\n");
     centerPrint("Main Menu");
     printf("█████████████████████████████████████████\n");
@@ -20,13 +42,13 @@ void DisplayController::showMainMenu()
     printf("5. Clear Contacts Database\n");
     printf("6. About\n");
     printf("7. Exit\n");
+
+    // ! I'm not sure if this is the best way to do this because I'm repeating the same code
+    this->readInput();
 }
 
 void DisplayController::showAbout()
 {
-    // clear screen
-    printf("\033[2J");
-    printf("\033[0;0H");
 
     printf("█████████████████████████████████████████\n");
     centerPrint("About");
@@ -40,4 +62,8 @@ void DisplayController::showAbout()
     centerPrint("Testing");
     centerPrint("Navid Mafi");
     centerPrint("--------------");
+    printf("Press any key to go back");
+    getchar();
+    getchar();
+    this->showMainMenu();
 }

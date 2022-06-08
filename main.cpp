@@ -30,17 +30,7 @@ int main(void)
     displayController.showMainMenu();
 
     // user input
-    int userInput = 0;
-    scanf("%d", &userInput);
-    switch (userInput)
-    {
-    case 6:
-        displayController.showAbout();
-        break;
-    default:
-        logger("error", "Invalid input");
-        break;
-    }
+    displayController.readInput();
 
     // Cleanup
     contactController.closeDatabase();
