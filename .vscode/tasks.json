@@ -9,11 +9,12 @@
         "-g",
         "${fileDirname}/Utils.cpp",
         "${fileDirname}/ContactController.cpp",
-        "${file}",
+        "${fileDirname}/DisplayController.cpp",
+        "${fileDirname}/main.cpp",
         "-lsqlite3",
         "-I/home/navid/Dev/ContactCLI",
         "-o",
-        "${fileDirname}/build/${fileBasenameNoExtension}"
+        "${fileDirname}/build/main"
       ],
       "options": {
         "cwd": "${fileDirname}"

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "ContactController.h"
+#include "DisplayController.h"
 
 using std::string;
 
@@ -21,9 +22,26 @@ int main(void)
     newContact.email = "aliAbaadi@gmail.com";
     newContact.phoneNumber = "09155888884";
 
-    contactController.addContact(newContact);
+    // contactController.addContact(newContact);
 
-    getchar();
+    // contactController.listContacts();
+
+    DisplayController displayController;
+    displayController.showMainMenu();
+
+    // user input
+    int userInput = 0;
+    scanf("%d", &userInput);
+    switch (userInput)
+    {
+    case 6:
+        displayController.showAbout();
+        break;
+    default:
+        logger("error", "Invalid input");
+        break;
+    }
+
     // Cleanup
     contactController.closeDatabase();
     return 0;

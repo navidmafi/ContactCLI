@@ -30,11 +30,11 @@ void ContactController::initDatabase()
 {
 
     string sqlQuery = "CREATE TABLE IF NOT EXISTS CONTACTS("
-                      "ID 			INT PRIMARY KEY     NOT NULL,"
+                      "ID 			INTEGER PRIMARY KEY,"
                       "FIRSTNAME     TEXT    			NOT NULL,"
                       "LASTNAME		TEXT    			NOT NULL,"
-                      "AGE			INT     			NOT NULL,"
-                      "GENDER		INT     			NOT NULL,"
+                      "AGE			INTEGER     			NOT NULL,"
+                      "GENDER		INTEGER     			NOT NULL,"
                       "ADDRESS		CHAR(50),"
                       "EMAIL			CHAR(50),"
                       "PHONENUMBER	TEXT		 		NOT NULL);";
@@ -69,13 +69,30 @@ void ContactController::addContact(ContactType contact)
     if (rc != SQLITE_OK)
     {
         string errMsg = cErrMsg;
-
         logger("error", "Error while inserting new contact :: " + errMsg);
         sqlite3_free(cErrMsg);
     }
     else
     {
         logger("info", "New Contact inserted succesfully");
+    }
+}
+void ContactController::listContacts()
+{
+    char *cErrMsg = 0;
+    const char *data = "Callback function called";
+    string sqlQuery = "SELECT * from CONTACTS";
+    int rc = sqlite3_exec(db, sqlQuery.c_str(), callback, (void *)data, &cErrMsg);
+    if (rc != SQLITE_OK)
+    {
+
+        string errMsg = cErrMsg;
+        logger("error", "Error while reading all contacts :: " + errMsg);
+        sqlite3_free(cErrMsg);
+    }
+    else
+    {
+        logger("info", "Read Contacts succesfully");
     }
 }
 void ContactController::closeDatabase()
