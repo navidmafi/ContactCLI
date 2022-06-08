@@ -39,11 +39,11 @@ void ContactController::initDatabase()
                       "EMAIL			CHAR(50),"
                       "PHONENUMBER	TEXT		 		NOT NULL);";
     char *cErrMsg = 0;
-    string errMsg;
     int rc = sqlite3_exec(db, sqlQuery.c_str(), callback, 0, &cErrMsg);
-    errMsg = cErrMsg;
+    logger("debug", "Ran sql init query");
     if (rc != SQLITE_OK)
     {
+        string errMsg = cErrMsg;
         logger("error", "Error while init db :: " + errMsg);
         sqlite3_free(cErrMsg);
     }
@@ -64,12 +64,12 @@ void ContactController::addContact(ContactType contact)
                       "\",\"" + contact.email +
                       "\",\"" + contact.phoneNumber + "\");";
     char *cErrMsg = 0;
-    string errMsg;
     int rc = sqlite3_exec(db, sqlQuery.c_str(), callback, 0, &cErrMsg);
-    errMsg = cErrMsg;
 
     if (rc != SQLITE_OK)
     {
+        string errMsg = cErrMsg;
+
         logger("error", "Error while inserting new contact :: " + errMsg);
         sqlite3_free(cErrMsg);
     }
