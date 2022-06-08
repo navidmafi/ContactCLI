@@ -12,6 +12,8 @@ int main(void)
     ContactController contactController;
     contactController.openDatabase();
 
+
+
     getchar();
     // Cleanup
     contactController.closeDatabase();

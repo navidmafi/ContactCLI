@@ -10,6 +10,7 @@ public:
     // ~ContactController();
     void openDatabase();
     void closeDatabase();
+    void initDatabase();
     void addContact(string name, string phone);
     void deleteContact(string name);
     void updateContact(string name, string phone);
