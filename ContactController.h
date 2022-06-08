@@ -1,5 +1,6 @@
 #include <string>
 #include <sqlite3.h>
+#include "Utils.h"
 
 using std::string;
 
@@ -11,7 +12,7 @@ public:
     void openDatabase();
     void closeDatabase();
     void initDatabase();
-    void addContact(string name, string phone);
+    void addContact(ContactType contact);
     void deleteContact(string name);
     void updateContact(string name, string phone);
     void listContacts();
@@ -19,9 +20,6 @@ public:
 
 private:
     sqlite3 *db;
-    char *zErrMsg = 0;
-    int rc;
-    string sql;
     string name;
     string phone;
     string message;
