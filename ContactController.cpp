@@ -95,6 +95,22 @@ void ContactController::listContacts()
         logger("info", "Read Contacts succesfully");
     }
 }
+void ContactController::clearDatabase()
+{
+    string sqlQuery = "DELETE from CONTACTS";
+    char *cErrMsg = 0;
+    int rc = sqlite3_exec(db, sqlQuery.c_str(), callback, 0, &cErrMsg);
+    if (rc != SQLITE_OK)
+    {
+        string errMsg = cErrMsg;
+        logger("error", "Error while clearing database :: " + errMsg);
+        sqlite3_free(cErrMsg);
+    }
+    else
+    {
+        logger("info", "Database cleared succesfully");
+    }
+}
 void ContactController::closeDatabase()
 {
     int rc = sqlite3_close(db);

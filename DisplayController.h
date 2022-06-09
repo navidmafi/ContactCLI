@@ -10,6 +10,7 @@ public:
 
     void readInput();
     void clearScreen();
+    void confirmDBClear();
     void centerPrint(string text);
     void showMainMenu();
     void showAbout();

@@ -12,6 +12,7 @@ public:
     void openDatabase();
     void closeDatabase();
     void initDatabase();
+    void clearDatabase();
     void addContact(ContactType contact);
     void deleteContact(string name);
     void updateContact(string name, string phone);

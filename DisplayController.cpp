@@ -9,12 +9,19 @@ void DisplayController::readInput()
     scanf("%d", &userInput);
     switch (userInput)
     {
+    case 5:
+        // ContactController::clearDatabase();
+
     case 6:
         clearScreen();
         this->showAbout();
         break;
+    case 7:
+        printf("Bye.");
+        exit(0);
     default:
         logger("error", "Invalid input");
+        this->readInput();
         break;
     }
 }
@@ -46,7 +53,14 @@ void DisplayController::showMainMenu()
     // ! I'm not sure if this is the best way to do this because I'm repeating the same code
     this->readInput();
 }
-
+void DisplayController::confirmDBClear()
+{
+    this->clearScreen();
+    printf("Are you sure you want to clear the database?\n");
+    printf("1. Yes\n");
+    printf("2. No\n");
+    this->readInput();
+}
 void DisplayController::showAbout()
 {
 
@@ -62,7 +76,7 @@ void DisplayController::showAbout()
     centerPrint("Testing");
     centerPrint("Navid Mafi");
     centerPrint("--------------");
-    printf("Press any key to go back");
+    printf("Press Enter to go back");
     getchar();
     getchar();
     this->showMainMenu();
