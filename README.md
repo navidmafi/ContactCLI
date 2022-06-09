@@ -1,4 +1,4 @@
-# ContactCLI
+# ContactCLI (Unfinished)
 Simple CLI Contact app for University project, Using SQLite and controller-like patterns
 
 ## Build
