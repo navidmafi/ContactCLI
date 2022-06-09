@@ -8,7 +8,7 @@ class DisplayController
 public:
     int outputWidth = 40;
 
-    void readInput();
+    int readInput(int min, int max);
     void clearScreen();
     void confirmDBClear();
     void centerPrint(string text);

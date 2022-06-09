@@ -30,7 +30,24 @@ int main(void)
     displayController.showMainMenu();
 
     // user input
-    displayController.readInput();
+    int mainMenuInput = displayController.readInput(1, 7);
+    switch (mainMenuInput)
+    {
+    case 5:
+        // ContactController::clearDatabase();
+
+    case 6:
+        displayController.clearScreen();
+        displayController.showAbout();
+        break;
+    case 7:
+        printf("Bye.");
+        exit(0);
+    default:
+        // we should never get here because we provided min and max for readInput
+        logger("error", "Invalid input (unhandled)");
+        break;
+    }
 
     // Cleanup
     contactController.closeDatabase();

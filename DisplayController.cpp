@@ -3,27 +3,18 @@
 #include "DisplayController.h"
 #include "Utils.h"
 
-void DisplayController::readInput()
+// I will try to use the "Single Responsibility Principle" here as much as i can.
+
+int DisplayController::readInput(int min, int max)
 {
     int userInput = 0;
     scanf("%d", &userInput);
-    switch (userInput)
+    while (userInput < min || userInput > max)
     {
-    case 5:
-        // ContactController::clearDatabase();
-
-    case 6:
-        clearScreen();
-        this->showAbout();
-        break;
-    case 7:
-        printf("Bye.");
-        exit(0);
-    default:
-        logger("error", "Invalid input");
-        this->readInput();
-        break;
+        printf("Invalid input, please try again\n");
+        scanf("%d", &userInput);
     }
+    return userInput;
 }
 void DisplayController::clearScreen()
 {
@@ -49,9 +40,6 @@ void DisplayController::showMainMenu()
     printf("5. Clear Contacts Database\n");
     printf("6. About\n");
     printf("7. Exit\n");
-
-    // ! I'm not sure if this is the best way to do this because I'm repeating the same code
-    this->readInput();
 }
 void DisplayController::confirmDBClear()
 {
@@ -59,7 +47,7 @@ void DisplayController::confirmDBClear()
     printf("Are you sure you want to clear the database?\n");
     printf("1. Yes\n");
     printf("2. No\n");
-    this->readInput();
+    this->readInput(1, 2);
 }
 void DisplayController::showAbout()
 {
