@@ -1,4 +1,4 @@
-/* Copyright Navid Mafi Raji
+/* Copyright Navid Mafi Ranji
 This source code is provided only for reference purposes. This is not a public domain source code.
 All rights reserved.
 */
