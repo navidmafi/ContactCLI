@@ -1,20 +1,65 @@
+/* Copyright Navid Mafi Raji
+This source code is provided only for reference purposes. This is not a public domain source code.
+All rights reserved.
+*/
+
+// Migrated to iostream because i really did not want to manually handle char buffers.
+#include <iostream>
 #include <stdio.h>
 #include <string>
 #include "DisplayController.h"
-#include "Utils.h"
+
+using std::cin;
+using std::cout;
+using std::endl;
 
 // I will try to use the "Single Responsibility Principle" here as much as i can.
-
 int DisplayController::readInput(int min, int max)
 {
     int userInput = 0;
     scanf("%d", &userInput);
     while (userInput < min || userInput > max)
     {
-        printf("Invalid input, please try again\n");
-        scanf("%d", &userInput);
+        cout << "Invalid input, please try again: ";
+        cin >> userInput;
     }
     return userInput;
+}
+template <typename T>
+T readOptionalInput(T defaultValue)
+{
+    T userInput;
+    cin.ignore();
+    if (cin.peek() == '\n')
+    {
+        return defaultValue;
+    }
+    else
+    {
+        getline(cin, userInput);
+        return userInput;
+    }
+}
+ContactType DisplayController::readContactInput()
+{
+    ContactType contact;
+    cout << "First Name (required): ";
+    string firstName = readOptionalInput<string>("Unknown");
+    cout << contact.firstName << endl;
+    cout << "Last Name: ";
+    cin >> contact.lastName;
+    cout << "Gender (1 = male , 2 = female, 3 = other ): ";
+    cin >> contact.gender;
+    cout << "Age : ";
+    cin >> contact.age;
+    cout << "Address: ";
+    cin >> contact.address;
+    cout << "Email :";
+    cin >> contact.email;
+    cout << "Phone number";
+    cin >> contact.phoneNumber;
+
+    return contact;
 }
 void DisplayController::clearScreen()
 {

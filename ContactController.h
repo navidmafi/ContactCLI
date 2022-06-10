@@ -1,3 +1,8 @@
+/* Copyright Navid Mafi Raji
+This source code is provided only for reference purposes. This is not a public domain source code.
+All rights reserved.
+*/
+
 #include <string>
 #include <sqlite3.h>
 #include "Utils.h"
