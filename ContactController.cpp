@@ -1,3 +1,7 @@
+/* Copyright Navid Mafi Ranji
+This source code is provided only for reference purposes. This is not a public domain source code.
+All rights reserved.
+*/
 
 #include "ContactController.h"
 using std::string;
@@ -16,11 +20,13 @@ static int callback(void *NotUsed, int argc, char **argv, char **azColName)
 static int callback2(void *NotUsed, int argc, char **argv, char **azColName)
 {
     // ID - First Name - Last Name
+    printf("%s", NotUsed);
     printf("%s - %s %s\n", argv[0], argv[1], argv[2]);
 
     printf("\n");
     return 0;
 }
+
 void ContactController::openDatabase()
 {
     int rc = sqlite3_open("db/test.db", &db);
@@ -127,6 +133,28 @@ void ContactController::listContacts()
     else
     {
         logger("info", "Read Contacts succesfully");
+    }
+}
+void ContactController::findContact(string searchString)
+{
+    // search for contact with firstname or lastname containing searchString
+    // return array of contacts
+    // if no contact found return empty array
+    // if more than one contact found return array of contacts
+    char *cErrMsg = 0;
+    const char *data = "Callback function called";
+    string sqlQuery = "SELECT * from CONTACTS WHERE FIRSTNAME LIKE \"%" + searchString + "%\" OR LASTNAME LIKE \"%" + searchString + "%\"";
+    int rc = sqlite3_exec(db, sqlQuery.c_str(), callback2, (void *)data, &cErrMsg);
+    if (rc != SQLITE_OK)
+    {
+
+        string errMsg = cErrMsg;
+        logger("error", "Error while searching contacts :: " + errMsg);
+        sqlite3_free(cErrMsg);
+    }
+    else
+    {
+        logger("info", "Search Contacts succesfully");
     }
 }
 void ContactController::clearDatabase()

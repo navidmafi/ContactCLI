@@ -95,8 +95,9 @@ void DisplayController::showMainMenu()
     printf("3. Edit Contact\n");
     printf("4. Delete Contact\n");
     printf("5. Clear Contacts Database\n");
-    printf("6. About\n");
-    printf("7. Exit\n");
+    printf("6. Find Contact\n");
+    printf("7. About\n");
+    printf("8. Exit\n");
 }
 void DisplayController::confirmDBClear()
 {
@@ -108,7 +109,12 @@ void DisplayController::confirmDBClear()
     printf("1. Yes\n");
     printf("2. No\n");
 }
-
+void DisplayController::showContactSearchHeader()
+{
+    printf("█████████████████████████████████████████\n");
+    centerPrint("Contacts Search");
+    printf("█████████████████████████████████████████\n");
+}
 void DisplayController::showContactListHeader()
 {
 

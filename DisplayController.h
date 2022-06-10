@@ -19,6 +19,7 @@ public:
     static void clearScreen();
     static void confirmDBClear();
     static void showContactListHeader();
+    static void showContactSearchHeader();
     static void centerPrint(string text);
     static void showMainMenu();
     static void showAbout();

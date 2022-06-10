@@ -23,7 +23,8 @@ public:
     static void deleteContact(string name);
     static void updateContact(string name, string phone);
     static void listContacts();
-    static void searchContact(string name);
+    static void searchContacts(string name);
+    static void findContact(string searchString);
     static sqlite3 *db;
     static int dbSize;
 

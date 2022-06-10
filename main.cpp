@@ -9,6 +9,7 @@ All rights reserved.
 #include "ContactController.h"
 #include "DisplayController.h"
 
+using std::cin;
 using std::cout;
 using std::endl;
 using std::string;
@@ -28,7 +29,7 @@ int main(void)
         DisplayController::showMainMenu();
 
         // user input
-        int mainMenuInput = DisplayController::readInput(1, 7);
+        int mainMenuInput = DisplayController::readInput(1, 8);
         switch (mainMenuInput)
         {
         case 1:
@@ -46,6 +47,9 @@ int main(void)
             cout << "Press any key to continue..." << endl;
             getchar();
             break;
+        case 3:
+            DisplayController::clearScreen();
+
         case 5:
             DisplayController::confirmDBClear();
             int confirmInput;
@@ -60,15 +64,26 @@ int main(void)
             }
 
             break;
-
         case 6:
+        {
+            DisplayController::clearScreen();
+            DisplayController::showContactSearchHeader();
+            cout << "Enter a name to search for: ";
+            string searchString;
+            cin >> searchString;
+            ContactController::findContact(searchString);
+        }
+
+        break;
+
+        case 7:
             DisplayController::clearScreen();
             DisplayController::showAbout();
             printf("Press enter to go back \n");
             getchar();
             getchar();
             break;
-        case 7:
+        case 8:
             printf("Bye.");
             exit(0);
         default:
