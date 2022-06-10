@@ -29,7 +29,6 @@ void DisplayController::centerPrint(string text)
 }
 void DisplayController::showMainMenu()
 {
-    clearScreen();
     printf("█████████████████████████████████████████\n");
     centerPrint("Main Menu");
     printf("█████████████████████████████████████████\n");
@@ -43,11 +42,13 @@ void DisplayController::showMainMenu()
 }
 void DisplayController::confirmDBClear()
 {
-    this->clearScreen();
+
+    printf("█████████████████████████████████████████\n");
+    centerPrint("Clear Contacts Database");
+    printf("█████████████████████████████████████████\n");
     printf("Are you sure you want to clear the database?\n");
     printf("1. Yes\n");
     printf("2. No\n");
-    this->readInput(1, 2);
 }
 void DisplayController::showAbout()
 {
@@ -64,8 +65,4 @@ void DisplayController::showAbout()
     centerPrint("Testing");
     centerPrint("Navid Mafi");
     centerPrint("--------------");
-    printf("Press Enter to go back");
-    getchar();
-    getchar();
-    this->showMainMenu();
 }

@@ -9,21 +9,16 @@ class ContactController
 public:
     // ContactController();
     // ~ContactController();
-    void openDatabase();
-    void closeDatabase();
-    void initDatabase();
-    void clearDatabase();
-    void addContact(ContactType contact);
-    void deleteContact(string name);
-    void updateContact(string name, string phone);
-    void listContacts();
-    void searchContact(string name);
+    static void openDatabase();
+    static void closeDatabase();
+    static void initDatabase();
+    static void clearDatabase();
+    static void addContact(ContactType contact);
+    static void deleteContact(string name);
+    static void updateContact(string name, string phone);
+    static void listContacts();
+    static void searchContact(string name);
+    static sqlite3 *db;
 
-private:
-    sqlite3 *db;
-    string name;
-    string phone;
-    string message;
-    string logtype;
-    string logmessage;
+    // private:
 };

@@ -1,16 +1,17 @@
 #include <stdio.h>
+#include <sqlite3.h>
 #include "ContactController.h"
 #include "DisplayController.h"
 
 using std::string;
+sqlite3 *ContactController::db;
 
 int main(void)
 {
     // Init
-    ContactController contactController;
-
-    contactController.openDatabase();
-    contactController.initDatabase();
+    // init static db variable
+    ContactController::openDatabase();
+    ContactController::initDatabase();
 
     // Stuff
     ContactType newContact;
@@ -22,23 +23,22 @@ int main(void)
     newContact.email = "aliAbaadi@gmail.com";
     newContact.phoneNumber = "09155888884";
 
-    // contactController.addContact(newContact);
+    ContactController::addContact(newContact);
 
     // contactController.listContacts();
-
-    DisplayController displayController;
-    displayController.showMainMenu();
+    DisplayController::showMainMenu();
 
     // user input
-    int mainMenuInput = displayController.readInput(1, 7);
+    int mainMenuInput = DisplayController::readInput(1, 7);
     switch (mainMenuInput)
     {
     case 5:
-        // ContactController::clearDatabase();
+        ContactController::clearDatabase();
+        break;
 
     case 6:
-        displayController.clearScreen();
-        displayController.showAbout();
+        DisplayController::clearScreen();
+        DisplayController::showAbout();
         break;
     case 7:
         printf("Bye.");
@@ -50,6 +50,6 @@ int main(void)
     }
 
     // Cleanup
-    contactController.closeDatabase();
+    ContactController::closeDatabase();
     return 0;
 }
