@@ -7,6 +7,8 @@ All rights reserved.
 #include <iostream>
 #include <stdio.h>
 #include <string>
+#include <stdexcept>
+#include <limits>
 #include "DisplayController.h"
 
 using std::cin;
@@ -22,15 +24,16 @@ int DisplayController::readInput(int min, int max)
     while (userInput < min || userInput > max)
     {
         cout << "Invalid input, please try again: ";
-        cin >> userInput >> ws;
+        cin >> userInput;
     }
+    cin.ignore();
+
     return userInput;
 }
 template <typename T>
 T readOptionalInput(T defaultValue)
 {
     T userInput;
-    cin.ignore();
 
     if (cin.peek() == '\n')
     {
@@ -63,9 +66,9 @@ ContactType DisplayController::readContactInput()
     contact.age = readInput(0, 500);
     cout << "Address: ";
     contact.address = readOptionalInput<string>("Unknown");
-    cout << "Email :";
+    cout << "Email: ";
     contact.email = readOptionalInput<string>("Unknown");
-    cout << "Phone number :";
+    cout << "Phone number: ";
     contact.phoneNumber = readOptionalInput<string>("Unknown");
 
     return contact;
