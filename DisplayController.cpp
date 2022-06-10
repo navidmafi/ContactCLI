@@ -108,6 +108,7 @@ void DisplayController::confirmDBClear()
     printf("1. Yes\n");
     printf("2. No\n");
 }
+// updateContactScreen
 void DisplayController::showAbout()
 {
 

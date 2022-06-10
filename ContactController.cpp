@@ -77,6 +77,31 @@ void ContactController::addContact(ContactType contact)
         logger("info", "New Contact inserted succesfully");
     }
 }
+
+void ContactController::updateContact(int id, ContactType newContent)
+{
+    // update contact with id = id to newContent
+    string sqlQuery = "UPDATE CONTACTS SET FIRSTNAME = \"" + newContent.firstName +
+                      "\", LASTNAME = \"" + newContent.lastName +
+                      "\", AGE = \"" + to_string(newContent.age) +
+                      "\", GENDER = \"" + to_string(newContent.age) +
+                      "\", ADDRESS = \"" + to_string(newContent.age) +
+                      "\", EMAIL = \"" + to_string(newContent.age) +
+                      "\", PHONENUMBER = \"" + to_string(newContent.age) + "\" WHERE ID = " + to_string(id) + ";";
+    char *cErrMsg = 0;
+    int rc = sqlite3_exec(db, sqlQuery.c_str(), callback, 0, &cErrMsg);
+
+    if (rc != SQLITE_OK)
+    {
+        string errMsg = cErrMsg;
+        logger("error", "Error while updating contact :: " + errMsg);
+        sqlite3_free(cErrMsg);
+    }
+    else
+    {
+        logger("info", "Contact updated succesfully");
+    }
+}
 void ContactController::listContacts()
 {
     char *cErrMsg = 0;

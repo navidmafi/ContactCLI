@@ -19,6 +19,17 @@ struct ContactType
     string email;
     string phoneNumber;
 };
+
+enum contactProps
+{
+    firstName,
+    lastName,
+    gender,
+    age,
+    address,
+    phoneNumber
+};
+
 void logger(string logtype, string message);
 
 #endif
