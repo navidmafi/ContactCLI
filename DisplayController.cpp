@@ -12,6 +12,7 @@ All rights reserved.
 using std::cin;
 using std::cout;
 using std::endl;
+using std::ws;
 
 // I will try to use the "Single Responsibility Principle" here as much as i can.
 int DisplayController::readInput(int min, int max)
@@ -21,7 +22,7 @@ int DisplayController::readInput(int min, int max)
     while (userInput < min || userInput > max)
     {
         cout << "Invalid input, please try again: ";
-        cin >> userInput;
+        cin >> userInput >> ws;
     }
     return userInput;
 }
@@ -30,34 +31,42 @@ T readOptionalInput(T defaultValue)
 {
     T userInput;
     cin.ignore();
+
     if (cin.peek() == '\n')
     {
         return defaultValue;
     }
     else
     {
-        getline(cin, userInput);
+        try
+        {
+            getline(cin, userInput);
+        }
+        catch (const std::exception &e)
+        {
+            std::cerr << e.what() << '\n';
+        }
+
         return userInput;
     }
 }
 ContactType DisplayController::readContactInput()
 {
     ContactType contact;
-    cout << "First Name (required): ";
-    string firstName = readOptionalInput<string>("Unknown");
-    cout << contact.firstName << endl;
+    cout << "First Name : ";
+    contact.firstName = readOptionalInput<string>("Unknown");
     cout << "Last Name: ";
-    cin >> contact.lastName;
-    cout << "Gender (1 = male , 2 = female, 3 = other ): ";
-    cin >> contact.gender;
-    cout << "Age : ";
-    cin >> contact.age;
+    contact.lastName = readOptionalInput<string>("Unknown");
+    cout << "Gender (1 = male , 2 = female, 3 = other / unknown ): ";
+    contact.gender = readInput(1, 3);
+    cout << "Age ( 0 For unknown ): ";
+    contact.age = readInput(0, 500);
     cout << "Address: ";
-    cin >> contact.address;
+    contact.address = readOptionalInput<string>("Unknown");
     cout << "Email :";
-    cin >> contact.email;
-    cout << "Phone number";
-    cin >> contact.phoneNumber;
+    contact.email = readOptionalInput<string>("Unknown");
+    cout << "Phone number :";
+    contact.phoneNumber = readOptionalInput<string>("Unknown");
 
     return contact;
 }

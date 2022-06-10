@@ -18,18 +18,6 @@ int main(void)
     ContactController::openDatabase();
     ContactController::initDatabase();
 
-    // Stuff
-    ContactType newContact;
-    newContact.firstName = "Ali";
-    newContact.lastName = "Akbari";
-    newContact.gender = 1;
-    newContact.age = 22;
-    newContact.address = "AliAabd";
-    newContact.email = "aliAbaadi@gmail.com";
-    newContact.phoneNumber = "09155888884";
-
-    ContactController::addContact(newContact);
-
     // contactController.listContacts();
     while (true)
     {
@@ -44,6 +32,8 @@ int main(void)
             {
                 ContactType newContact;
                 newContact = DisplayController::readContactInput();
+                ContactController::addContact(newContact);
+                break;
             }
         case 5:
             ContactController::clearDatabase();
