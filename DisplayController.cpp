@@ -37,6 +37,7 @@ T readOptionalInput(T defaultValue)
 
     if (cin.peek() == '\n')
     {
+        cin.ignore();
         return defaultValue;
     }
     else
