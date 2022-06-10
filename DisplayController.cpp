@@ -108,6 +108,14 @@ void DisplayController::confirmDBClear()
     printf("1. Yes\n");
     printf("2. No\n");
 }
+
+void DisplayController::showContactListHeader()
+{
+
+    printf("█████████████████████████████████████████\n");
+    centerPrint("Contacts");
+    printf("█████████████████████████████████████████\n");
+}
 // updateContactScreen
 void DisplayController::showAbout()
 {

@@ -25,6 +25,7 @@ public:
     static void listContacts();
     static void searchContact(string name);
     static sqlite3 *db;
+    static int dbSize;
 
     // private:
 };

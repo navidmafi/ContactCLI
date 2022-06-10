@@ -5,12 +5,16 @@ All rights reserved.
 
 #include <stdio.h>
 #include <sqlite3.h>
+#include <iostream>
 #include "ContactController.h"
 #include "DisplayController.h"
 
+using std::cout;
+using std::endl;
 using std::string;
 // init static db pointer
 sqlite3 *ContactController::db;
+int ContactController::dbSize = 0;
 
 int main(void)
 {
@@ -35,8 +39,26 @@ int main(void)
                 ContactController::addContact(newContact);
                 break;
             }
+        case 2:
+            DisplayController::clearScreen();
+            DisplayController::showContactListHeader();
+            ContactController::listContacts();
+            cout << "Press any key to continue..." << endl;
+            getchar();
+            break;
         case 5:
-            ContactController::clearDatabase();
+            DisplayController::confirmDBClear();
+            int confirmInput;
+            confirmInput = DisplayController::readInput(1, 2);
+            if (confirmInput == 1)
+            {
+                ContactController::clearDatabase();
+            }
+            else
+            {
+                logger("info", "DB clear cancelled");
+            }
+
             break;
 
         case 6:

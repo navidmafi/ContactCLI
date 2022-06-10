@@ -30,6 +30,13 @@ enum contactProps
     phoneNumber
 };
 
+struct SimpleContact
+{
+    int id;
+    string firstName;
+    string lastName;
+};
+
 void logger(string logtype, string message);
 
 #endif

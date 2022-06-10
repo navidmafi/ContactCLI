@@ -5,15 +5,22 @@ using std::to_string;
 
 static int callback(void *NotUsed, int argc, char **argv, char **azColName)
 {
-    int i;
-    for (i = 0; i < argc; i++)
+    for (int i = 0; i < argc; i++)
     {
         printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
     }
+
     printf("\n");
     return 0;
 }
+static int callback2(void *NotUsed, int argc, char **argv, char **azColName)
+{
+    // ID - First Name - Last Name
+    printf("%s - %s %s\n", argv[0], argv[1], argv[2]);
 
+    printf("\n");
+    return 0;
+}
 void ContactController::openDatabase()
 {
     int rc = sqlite3_open("db/test.db", &db);
@@ -106,8 +113,10 @@ void ContactController::listContacts()
 {
     char *cErrMsg = 0;
     const char *data = "Callback function called";
-    string sqlQuery = "SELECT * from CONTACTS";
-    int rc = sqlite3_exec(db, sqlQuery.c_str(), callback, (void *)data, &cErrMsg);
+    // string sqlQuery = "SELECT * from CONTACTS";
+    // read id and firstname and lastname from db
+    string sqlQuery = "SELECT ID,FIRSTNAME,LASTNAME from CONTACTS";
+    int rc = sqlite3_exec(db, sqlQuery.c_str(), callback2, (void *)data, &cErrMsg);
     if (rc != SQLITE_OK)
     {
 
