@@ -72,14 +72,16 @@ int main(void)
             string searchString;
             cin >> searchString;
             ContactController::findContact(searchString);
+            getchar();
         }
-
-        break;
+            cout << "Press Enter to continue" << endl;
+            getchar();
+            break;
 
         case 7:
             DisplayController::clearScreen();
             DisplayController::showAbout();
-            printf("Press enter to go back \n");
+            cout << "Press Enter to continue" << endl;
             getchar();
             getchar();
             break;

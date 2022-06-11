@@ -9,19 +9,10 @@ using std::to_string;
 
 static int callback(void *NotUsed, int argc, char **argv, char **azColName)
 {
-    for (int i = 0; i < argc; i++)
-    {
-        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-    }
-
-    printf("\n");
-    return 0;
-}
-static int callback2(void *NotUsed, int argc, char **argv, char **azColName)
-{
-    // ID - First Name - Last Name
-    printf("%s", NotUsed);
     printf("%s - %s %s\n", argv[0], argv[1], argv[2]);
+    // for (int i = 0; i < argc; i++)
+    // {
+    // }
 
     printf("\n");
     return 0;
@@ -118,11 +109,10 @@ void ContactController::updateContact(int id, ContactType newContent)
 void ContactController::listContacts()
 {
     char *cErrMsg = 0;
-    const char *data = "Callback function called";
     // string sqlQuery = "SELECT * from CONTACTS";
     // read id and firstname and lastname from db
     string sqlQuery = "SELECT ID,FIRSTNAME,LASTNAME from CONTACTS";
-    int rc = sqlite3_exec(db, sqlQuery.c_str(), callback2, (void *)data, &cErrMsg);
+    int rc = sqlite3_exec(db, sqlQuery.c_str(), callback, 0, &cErrMsg);
     if (rc != SQLITE_OK)
     {
 
@@ -142,9 +132,8 @@ void ContactController::findContact(string searchString)
     // if no contact found return empty array
     // if more than one contact found return array of contacts
     char *cErrMsg = 0;
-    const char *data = "Callback function called";
     string sqlQuery = "SELECT * from CONTACTS WHERE FIRSTNAME LIKE \"%" + searchString + "%\" OR LASTNAME LIKE \"%" + searchString + "%\"";
-    int rc = sqlite3_exec(db, sqlQuery.c_str(), callback2, (void *)data, &cErrMsg);
+    int rc = sqlite3_exec(db, sqlQuery.c_str(), callback, 0, &cErrMsg);
     if (rc != SQLITE_OK)
     {
 
