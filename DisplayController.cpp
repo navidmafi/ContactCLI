@@ -6,27 +6,40 @@ All rights reserved.
 // Migrated to iostream because i really did not want to manually handle char buffers.
 #include <iostream>
 #include <iomanip>
+#include <limits>
 #include <string>
 #include "DisplayController.h"
 
 using std::cin;
 using std::cout;
 using std::endl;
-using std::ws;
 
 // I will try to use the "Single Responsibility Principle" here as much as i can.
 int DisplayController::readInput(int min, int max)
 {
     int userInput = 0;
-    scanf("%d", &userInput);
-    while (userInput < min || userInput > max)
+    while (true)
     {
-        cout << "Invalid input, please try again: ";
         cin >> userInput;
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            logger("error", "Invalid input, please try again");
+        }
+        else
+        {
+            if (userInput < min || userInput > max)
+            {
+                logger("error", "Invalid input, please try again");
+            }
+            else
+            {
+                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                return userInput;
+            }
+        }
     }
-    cin.ignore();
-
-    return userInput;
 }
 template <typename T>
 T DisplayController::readOptionalInput(T defaultValue)

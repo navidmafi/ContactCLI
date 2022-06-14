@@ -3,9 +3,8 @@ This source code is provided only for reference purposes. This is not a public d
 All rights reserved.
 */
 
-#include <stdio.h>
-#include <sqlite3.h>
 #include <iostream>
+#include <sqlite3.h>
 #include "ContactController.h"
 #include "DisplayController.h"
 
