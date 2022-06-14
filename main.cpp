@@ -187,7 +187,14 @@ int main(void)
             string searchString;
             cin >> searchString;
             ContactController::findContact(searchString);
-            getchar();
+            logger("userInput", "enter id to show details or enter 0 to go back");
+            int subInput;
+            subInput = DisplayController::readInput(0, ContactController::dbSize);
+            if (subInput == 0)
+            {
+                break;
+            }
+            ContactController::showSingleContact(subInput);
         }
             cout << "Press Enter to continue" << endl;
             getchar();

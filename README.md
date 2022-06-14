@@ -1,10 +1,20 @@
-# ContactCLI (Unfinished)
+# ContactCLI
 
-Simple CLI Contact app for University project, Using SQLite and controller-like patterns
+## This project has been finished on 14 June 2022
+
+---
+
+Simple CLI Contact app for University project, Using SQLite as database and contollers for CRUD operations.
 
 ## Build
 
-Pre configured for building in VSCode. Make sure you have your `includePath` set correctly
+Pre configured for building in VSCode. Make sure you have your `includePath` set correctly.
+
+If you are not using VS Code, you can build with :
+
+```sh
+/path/to/g++ -g ./Utils.cpp ./ContactController.cpp ./DisplayController.cpp ./main.cpp -lsqlite3 -o ./build/main
+```
 
 ## Features and concpets used
 

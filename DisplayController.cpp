@@ -127,7 +127,7 @@ void DisplayController::showAbout()
     printf("█████████████████████████████████████████\n");
     centerPrint("About");
     printf("█████████████████████████████████████████\n");
-    centerPrint("Software architecture");
+    centerPrint("Software architecture and DB design");
     centerPrint("Navid Mafi");
     centerPrint("--------------");
     centerPrint("Development");
@@ -136,4 +136,5 @@ void DisplayController::showAbout()
     centerPrint("Testing");
     centerPrint("Navid Mafi");
     centerPrint("--------------");
+    centerPrint("Copyright (c) Navid Mafi 2022");
 }
