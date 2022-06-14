@@ -226,15 +226,14 @@ int main(void)
             ContactController::showSingleContact(subInput);
         }
             cout << "Press Enter to continue" << endl;
-            getchar();
+            cin.get();
             break;
 
         case 7:
             DisplayController::clearScreen();
             DisplayController::showAbout();
             cout << "Press Enter to continue" << endl;
-            getchar();
-            getchar();
+            cin.get();
             break;
         case 8:
             printf("Bye.");

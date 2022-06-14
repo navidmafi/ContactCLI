@@ -74,8 +74,15 @@ ContactType DisplayController::readContactInput()
 }
 void DisplayController::clearScreen()
 {
-    printf("\033[2J");
-    printf("\033[0;0H");
+#if defined _WIN32
+    system("cls");
+    // clrscr(); // including header file : conio.h
+#elif defined(__LINUX__) || defined(__gnu_linux__) || defined(__linux__)
+    system("clear");
+    // std::cout<< u8"\033[2J\033[1;1H"; //Using ANSI Escape Sequences
+#elif defined(__APPLE__)
+    system("clear");
+#endif
 }
 void DisplayController::centerPrint(string text)
 {
@@ -85,9 +92,9 @@ void DisplayController::centerPrint(string text)
 }
 void DisplayController::showMainMenu()
 {
-    printf("-----------------------------------------\n");
+    cout << "-----------------------------------------\n";
     centerPrint("Main Menu");
-    printf("-----------------------------------------\n");
+    cout << "-----------------------------------------\n";
     printf("1. Add Contact\n");
     printf("2. List Contacts\n");
     printf("3. Edit Contact\n");
@@ -100,33 +107,33 @@ void DisplayController::showMainMenu()
 void DisplayController::confirmDBClear()
 {
 
-    printf("-----------------------------------------\n");
+    cout << "-----------------------------------------\n";
     centerPrint("Clear Contacts Database");
-    printf("-----------------------------------------\n");
+    cout << "-----------------------------------------\n";
     printf("Are you sure you want to clear the database?\n");
     printf("1. Yes\n");
     printf("2. No\n");
 }
 void DisplayController::showContactSearchHeader()
 {
-    printf("-----------------------------------------\n");
+    cout << "-----------------------------------------\n";
     centerPrint("Contacts Search");
-    printf("-----------------------------------------\n");
+    cout << "-----------------------------------------\n";
 }
 void DisplayController::showContactListHeader()
 {
 
-    printf("-----------------------------------------\n");
+    cout << "-----------------------------------------\n";
     centerPrint("Contacts");
-    printf("-----------------------------------------\n");
+    cout << "-----------------------------------------\n";
 }
 // updateContactScreen
 void DisplayController::showAbout()
 {
 
-    printf("-----------------------------------------\n");
+    cout << "-----------------------------------------\n";
     centerPrint("About");
-    printf("-----------------------------------------\n");
+    cout << "-----------------------------------------\n";
     centerPrint("Software architecture and DB design");
     centerPrint("Navid Mafi");
     centerPrint("--------------");

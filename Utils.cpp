@@ -3,13 +3,14 @@ This source code is provided only for reference purposes. This is not a public d
 All rights reserved.
 */
 
-#include <stdio.h>
+#include <iostream>
 #include <string>
 #include "Utils.h"
 
+using std::cout;
 using std::string;
 
 void logger(string logtype, string message)
 {
-    printf("[%s] %s\n", logtype.c_str(), message.c_str());
+    cout << "[" << logtype << "]" << message;
 }
