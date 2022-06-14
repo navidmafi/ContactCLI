@@ -23,7 +23,7 @@ public:
     static void editContactField(int id, string field, string newValue);
     static void showSingleContact(int contactID);
     static void readDBSize();
-    static void deleteContact(string name);
+    static void deleteContact(int id);
     static void updateContact(string name, string phone);
     static void listContacts();
     static void searchContacts(string name);

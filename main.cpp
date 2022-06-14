@@ -165,6 +165,35 @@ int main(void)
             break;
 
             break;
+        case 4:
+            DisplayController::clearScreen();
+            ContactController::listContacts();
+            if (ContactController::dbSize == 0)
+            {
+                logger("userInput", "No contact to delete, press enter to go back");
+                cin.get();
+            }
+            else
+            {
+                logger("userInput", "Enter contact ID to delete");
+                int subInput;
+                subInput = DisplayController::readInput(1, ContactController::dbSize);
+                // confirm deletion
+                logger("userInput", "Are you sure you want to delete this contact? (y/n)");
+                char userSelection;
+
+                // using ASCII char number :D
+                userSelection = cin.get();
+                if (userSelection == 'y')
+                {
+                    ContactController::deleteContact(subInput);
+                }
+                else
+                {
+                    logger("info", "No change made");
+                }
+            }
+            break;
         case 5:
             DisplayController::confirmDBClear();
             int confirmInput;

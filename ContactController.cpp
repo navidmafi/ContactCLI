@@ -111,7 +111,6 @@ void ContactController::addContact(ContactType contact)
         readDBSize();
     }
 }
-
 void ContactController::editContactField(int id, string field, string newValue)
 {
     string sqlQuery = "UPDATE CONTACTS SET " + field + " = \"" + newValue + "\" WHERE ID = " + to_string(id) + ";";
@@ -128,7 +127,23 @@ void ContactController::editContactField(int id, string field, string newValue)
         logger("info", "Field edited succesfully");
     }
 }
-
+void ContactController::deleteContact(int id)
+{
+    string sqlQuery = "DELETE FROM CONTACTS WHERE ID = " + to_string(id) + ";";
+    char *cErrMsg = 0;
+    int rc = sqlite3_exec(db, sqlQuery.c_str(), 0, 0, &cErrMsg);
+    if (rc != SQLITE_OK)
+    {
+        string errMsg = cErrMsg;
+        logger("error", "Error while deleting contact :: " + errMsg);
+        sqlite3_free(cErrMsg);
+    }
+    else
+    {
+        logger("info", "Contact deleted succesfully");
+        readDBSize();
+    }
+}
 void ContactController::updateContact(int id, ContactType newContent)
 {
     // update contact with id = id to newContent
