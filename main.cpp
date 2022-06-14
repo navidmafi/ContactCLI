@@ -86,7 +86,7 @@ int main(void)
                     logger("userInput", "Enter new firstName: ");
                     string newFirstName;
                     newFirstName = DisplayController::readOptionalInput<string>();
-                    if (newFirstName != "NOINPUT")
+                    if (newFirstName != "Unknown")
                     {
                         ContactController::editContactField(subInput, "LASTNAME", newFirstName);
                     }
@@ -100,8 +100,8 @@ int main(void)
                 {
                     logger("userInput", "Enter new lastName: ");
                     string newLastName;
-                    newLastName = DisplayController::readOptionalInput<string>(NULL);
-                    if (newLastName != "")
+                    newLastName = DisplayController::readOptionalInput<string>();
+                    if (newLastName != "Unknown")
                     {
                         ContactController::editContactField(subInput, "LASTNAME", newLastName);
                     }
@@ -115,8 +115,8 @@ int main(void)
                 {
                     logger("userInput", "Enter new address : ");
                     string newAddress;
-                    newAddress = DisplayController::readInput(0, 3);
-                    if (newAddress != "")
+                    newAddress = DisplayController::readOptionalInput<string>();
+                    if (newAddress != "Unknown")
                     {
                         ContactController::editContactField(subInput, "ADDRESS", newAddress);
                     }
@@ -130,8 +130,8 @@ int main(void)
                 {
                     logger("userInput", "Enter new email: ");
                     string newEmail;
-                    newEmail = DisplayController::readOptionalInput<string>(NULL);
-                    if (newEmail != "")
+                    newEmail = DisplayController::readOptionalInput<string>();
+                    if (newEmail != "Unknown")
                     {
                         ContactController::editContactField(subInput, "EMAIL", newEmail);
                     }
@@ -145,8 +145,8 @@ int main(void)
                 {
                     logger("userInput", "Enter new phoneNumber: ");
                     string newPhoneNumber;
-                    newPhoneNumber = DisplayController::readOptionalInput<string>(NULL);
-                    if (newPhoneNumber != "")
+                    newPhoneNumber = DisplayController::readOptionalInput<string>();
+                    if (newPhoneNumber != "Unknown")
                     {
                         ContactController::editContactField(subInput, "PHONENUMBER", newPhoneNumber);
                     }
@@ -158,9 +158,9 @@ int main(void)
                 }
 
                 default:
+                    logger("info", "Invalid input");
                     break;
                 }
-                cin.get();
             }
             break;
 
