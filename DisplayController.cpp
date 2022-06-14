@@ -85,9 +85,9 @@ void DisplayController::centerPrint(string text)
 }
 void DisplayController::showMainMenu()
 {
-    printf("█████████████████████████████████████████\n");
+    printf("-----------------------------------------\n");
     centerPrint("Main Menu");
-    printf("█████████████████████████████████████████\n");
+    printf("-----------------------------------------\n");
     printf("1. Add Contact\n");
     printf("2. List Contacts\n");
     printf("3. Edit Contact\n");
@@ -100,33 +100,33 @@ void DisplayController::showMainMenu()
 void DisplayController::confirmDBClear()
 {
 
-    printf("█████████████████████████████████████████\n");
+    printf("-----------------------------------------\n");
     centerPrint("Clear Contacts Database");
-    printf("█████████████████████████████████████████\n");
+    printf("-----------------------------------------\n");
     printf("Are you sure you want to clear the database?\n");
     printf("1. Yes\n");
     printf("2. No\n");
 }
 void DisplayController::showContactSearchHeader()
 {
-    printf("█████████████████████████████████████████\n");
+    printf("-----------------------------------------\n");
     centerPrint("Contacts Search");
-    printf("█████████████████████████████████████████\n");
+    printf("-----------------------------------------\n");
 }
 void DisplayController::showContactListHeader()
 {
 
-    printf("█████████████████████████████████████████\n");
+    printf("-----------------------------------------\n");
     centerPrint("Contacts");
-    printf("█████████████████████████████████████████\n");
+    printf("-----------------------------------------\n");
 }
 // updateContactScreen
 void DisplayController::showAbout()
 {
 
-    printf("█████████████████████████████████████████\n");
+    printf("-----------------------------------------\n");
     centerPrint("About");
-    printf("█████████████████████████████████████████\n");
+    printf("-----------------------------------------\n");
     centerPrint("Software architecture and DB design");
     centerPrint("Navid Mafi");
     centerPrint("--------------");

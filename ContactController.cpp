@@ -32,7 +32,7 @@ static int contactCountCB(void *NotUsed, int argc, char **argv, char **azColName
 }
 void ContactController::openDatabase()
 {
-    int rc = sqlite3_open("db/test.db", &db);
+    int rc = sqlite3_open("contacts.db", &db);
     if (rc)
     {
         logger("error", "Error occured while opening DB :: " + string(sqlite3_errmsg(db)));
