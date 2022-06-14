@@ -20,6 +20,8 @@ public:
     static void confirmDBClear();
     static void showContactListHeader();
     static void showContactSearchHeader();
+    template <typename T>
+    static T readOptionalInput(T defaultValue);
     static void centerPrint(string text);
     static void showMainMenu();
     static void showAbout();

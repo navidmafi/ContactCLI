@@ -4,20 +4,32 @@ All rights reserved.
 */
 
 #include "ContactController.h"
+using std::stoi;
 using std::string;
 using std::to_string;
-
-static int callback(void *NotUsed, int argc, char **argv, char **azColName)
+static int contactListCB(void *NotUsed, int argc, char **argv, char **azColName)
 {
     printf("%s - %s %s\n", argv[0], argv[1], argv[2]);
-    // for (int i = 0; i < argc; i++)
-    // {
-    // }
-
     printf("\n");
     return 0;
 }
 
+static int singleContactCB(void *NotUsed, int argc, char **argv, char **azColName)
+{
+    for (int i = 0; i < argc; i++)
+    {
+        printf("%s : %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+    }
+
+    printf("\n");
+    return 0;
+}
+static int contactCountCB(void *NotUsed, int argc, char **argv, char **azColName)
+{
+    logger("info", "Contact count: " + stoi(argv[0]));
+    ContactController::dbSize = stoi(argv[0]);
+    return 0;
+}
 void ContactController::openDatabase()
 {
     int rc = sqlite3_open("db/test.db", &db);
@@ -43,7 +55,7 @@ void ContactController::initDatabase()
                       "EMAIL			CHAR(50),"
                       "PHONENUMBER	TEXT		 		NOT NULL);";
     char *cErrMsg = 0;
-    int rc = sqlite3_exec(db, sqlQuery.c_str(), callback, 0, &cErrMsg);
+    int rc = sqlite3_exec(db, sqlQuery.c_str(), contactListCB, 0, &cErrMsg);
     logger("debug", "Ran sql init query");
     if (rc != SQLITE_OK)
     {
@@ -54,6 +66,25 @@ void ContactController::initDatabase()
     else
     {
         logger("info", "DB Init succesfully");
+    }
+
+    // set dbSize
+}
+void ContactController::readDBSize()
+{
+    char *cErrMsg = 0;
+    string sqlQuery2 = "SELECT COUNT(*) FROM CONTACTS;";
+    int rc = sqlite3_exec(db, sqlQuery2.c_str(), contactCountCB, 0, &cErrMsg);
+    logger("debug", "Ran sql count query");
+    if (rc != SQLITE_OK)
+    {
+        string errMsg = cErrMsg;
+        logger("error", "Error while counting db :: " + errMsg);
+        sqlite3_free(cErrMsg);
+    }
+    else
+    {
+        logger("info", "DB Count succesfully");
     }
 }
 void ContactController::addContact(ContactType contact)
@@ -68,7 +99,7 @@ void ContactController::addContact(ContactType contact)
                       "\",\"" + contact.email +
                       "\",\"" + contact.phoneNumber + "\");";
     char *cErrMsg = 0;
-    int rc = sqlite3_exec(db, sqlQuery.c_str(), callback, 0, &cErrMsg);
+    int rc = sqlite3_exec(db, sqlQuery.c_str(), contactListCB, 0, &cErrMsg);
 
     if (rc != SQLITE_OK)
     {
@@ -79,6 +110,24 @@ void ContactController::addContact(ContactType contact)
     else
     {
         logger("info", "New Contact inserted succesfully");
+        readDBSize();
+    }
+}
+
+void ContactController::editContactField(int id, string field, string newValue)
+{
+    string sqlQuery = "UPDATE CONTACTS SET " + field + " = \"" + newValue + "\" WHERE ID = " + to_string(id) + ";";
+    char *cErrMsg = 0;
+    int rc = sqlite3_exec(db, sqlQuery.c_str(), 0, 0, &cErrMsg);
+    if (rc != SQLITE_OK)
+    {
+        string errMsg = cErrMsg;
+        logger("error", "Error while editing contact :: " + errMsg);
+        sqlite3_free(cErrMsg);
+    }
+    else
+    {
+        logger("info", "Field edited succesfully");
     }
 }
 
@@ -93,7 +142,7 @@ void ContactController::updateContact(int id, ContactType newContent)
                       "\", EMAIL = \"" + to_string(newContent.age) +
                       "\", PHONENUMBER = \"" + to_string(newContent.age) + "\" WHERE ID = " + to_string(id) + ";";
     char *cErrMsg = 0;
-    int rc = sqlite3_exec(db, sqlQuery.c_str(), callback, 0, &cErrMsg);
+    int rc = sqlite3_exec(db, sqlQuery.c_str(), contactListCB, 0, &cErrMsg);
 
     if (rc != SQLITE_OK)
     {
@@ -112,7 +161,7 @@ void ContactController::listContacts()
     // string sqlQuery = "SELECT * from CONTACTS";
     // read id and firstname and lastname from db
     string sqlQuery = "SELECT ID,FIRSTNAME,LASTNAME from CONTACTS";
-    int rc = sqlite3_exec(db, sqlQuery.c_str(), callback, 0, &cErrMsg);
+    int rc = sqlite3_exec(db, sqlQuery.c_str(), contactListCB, 0, &cErrMsg);
     if (rc != SQLITE_OK)
     {
 
@@ -125,6 +174,23 @@ void ContactController::listContacts()
         logger("info", "Read Contacts succesfully");
     }
 }
+void ContactController::showSingleContact(int contactID)
+{
+    char *cErrMsg = 0;
+    string sqlQuery = "SELECT * from CONTACTS WHERE ID = " + to_string(contactID) + ";";
+    int rc = sqlite3_exec(db, sqlQuery.c_str(), singleContactCB, 0, &cErrMsg);
+    if (rc != SQLITE_OK)
+    {
+
+        string errMsg = cErrMsg;
+        logger("error", "Error while reading single contact :: " + errMsg);
+        sqlite3_free(cErrMsg);
+    }
+    else
+    {
+        logger("info", "Read single contact succesfully");
+    }
+}
 void ContactController::findContact(string searchString)
 {
     // search for contact with firstname or lastname containing searchString
@@ -133,7 +199,7 @@ void ContactController::findContact(string searchString)
     // if more than one contact found return array of contacts
     char *cErrMsg = 0;
     string sqlQuery = "SELECT * from CONTACTS WHERE FIRSTNAME LIKE \"%" + searchString + "%\" OR LASTNAME LIKE \"%" + searchString + "%\"";
-    int rc = sqlite3_exec(db, sqlQuery.c_str(), callback, 0, &cErrMsg);
+    int rc = sqlite3_exec(db, sqlQuery.c_str(), contactListCB, 0, &cErrMsg);
     if (rc != SQLITE_OK)
     {
 
@@ -150,7 +216,7 @@ void ContactController::clearDatabase()
 {
     string sqlQuery = "DELETE from CONTACTS";
     char *cErrMsg = 0;
-    int rc = sqlite3_exec(db, sqlQuery.c_str(), callback, 0, &cErrMsg);
+    int rc = sqlite3_exec(db, sqlQuery.c_str(), contactListCB, 0, &cErrMsg);
     if (rc != SQLITE_OK)
     {
         string errMsg = cErrMsg;

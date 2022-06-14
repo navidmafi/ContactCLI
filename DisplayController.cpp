@@ -31,7 +31,7 @@ int DisplayController::readInput(int min, int max)
     return userInput;
 }
 template <typename T>
-T readOptionalInput(T defaultValue)
+T DisplayController::readOptionalInput(T defaultValue)
 {
     T userInput;
 

@@ -20,6 +20,9 @@ public:
     static void clearDatabase();
     static void addContact(ContactType contact);
     static void updateContact(int id, ContactType newContent);
+    static void editContactField(int id, string field, string newValue);
+    static void showSingleContact(int contactID);
+    static void readDBSize();
     static void deleteContact(string name);
     static void updateContact(string name, string phone);
     static void listContacts();
