@@ -2,15 +2,16 @@
 This source code is provided only for reference purposes. This is not a public domain source code.
 All rights reserved.
 */
-
+#include <iostream>
 #include "ContactController.h"
+using std::cout;
+using std::endl;
 using std::stoi;
 using std::string;
 using std::to_string;
 static int contactListCB(void *NotUsed, int argc, char **argv, char **azColName)
 {
-    printf("%s - %s %s\n", argv[0], argv[1], argv[2]);
-    printf("\n");
+    cout << argv[0] << " - " << argv[1] << " " << argv[2] << endl;
     return 0;
 }
 
@@ -18,7 +19,7 @@ static int singleContactCB(void *NotUsed, int argc, char **argv, char **azColNam
 {
     for (int i = 0; i < argc; i++)
     {
-        printf("%s : %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+        cout << azColName[i] << " : " << argv[i] << endl;
     }
 
     printf("\n");

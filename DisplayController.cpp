@@ -5,10 +5,8 @@ All rights reserved.
 
 // Migrated to iostream because i really did not want to manually handle char buffers.
 #include <iostream>
-#include <stdio.h>
+#include <iomanip>
 #include <string>
-#include <stdexcept>
-#include <limits>
 #include "DisplayController.h"
 
 using std::cin;
@@ -88,31 +86,32 @@ void DisplayController::centerPrint(string text)
 {
     int textLength = text.length();
     int padding = (outputWidth - textLength) / 2;
-    printf("%*s%s%*s\n", padding, "", text.c_str(), padding, "");
+    // printf("%*s%s%*s\n", padding, "", text.c_str(), padding, "");
+    cout << std::setw(padding) << " " << text << std::setw(padding) << " " << endl;
 }
 void DisplayController::showMainMenu()
 {
     cout << "-----------------------------------------\n";
     centerPrint("Main Menu");
     cout << "-----------------------------------------\n";
-    printf("1. Add Contact\n");
-    printf("2. List Contacts\n");
-    printf("3. Edit Contact\n");
-    printf("4. Delete Contact\n");
-    printf("5. Clear Contacts Database\n");
-    printf("6. Find Contact\n");
-    printf("7. About\n");
-    printf("8. Exit\n");
+    cout << "1. Add Contact\n";
+    cout << "2. List Contacts\n";
+    cout << "3. Edit Contact\n";
+    cout << "4. Delete Contact\n";
+    cout << "5. Clear Contacts Database\n";
+    cout << "6. Find Contact\n";
+    cout << "7. About\n";
+    cout << "8. Exit\n";
 }
+
 void DisplayController::confirmDBClear()
 {
 
     cout << "-----------------------------------------\n";
     centerPrint("Clear Contacts Database");
     cout << "-----------------------------------------\n";
-    printf("Are you sure you want to clear the database?\n");
-    printf("1. Yes\n");
-    printf("2. No\n");
+    cout << "Are you sure you want to clear the database?\n";
+    cout << "1. Yes                 2. No\n";
 }
 void DisplayController::showContactSearchHeader()
 {

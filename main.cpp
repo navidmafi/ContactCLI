@@ -236,7 +236,7 @@ int main(void)
             cin.get();
             break;
         case 8:
-            printf("Bye.");
+            cout << "bye." << endl;
             exit(0);
         default:
             // we should never get here because we provided min and max for readInput

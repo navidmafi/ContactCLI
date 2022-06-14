@@ -8,9 +8,10 @@ All rights reserved.
 #include "Utils.h"
 
 using std::cout;
+using std::endl;
 using std::string;
 
 void logger(string logtype, string message)
 {
-    cout << "[" << logtype << "]" << message;
+    cout << "[" << logtype << "] " << message << endl;
 }
