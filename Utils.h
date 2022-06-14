@@ -13,7 +13,6 @@ struct ContactType
 {
     string firstName;
     string lastName;
-    int gender;
     int age;
     string address;
     string email;
@@ -24,7 +23,6 @@ enum contactProps
 {
     firstName,
     lastName,
-    gender,
     age,
     address,
     phoneNumber

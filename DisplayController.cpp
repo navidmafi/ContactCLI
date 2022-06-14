@@ -58,19 +58,17 @@ ContactType DisplayController::readContactInput()
 {
     ContactType contact;
     cout << "First Name : ";
-    contact.firstName = readOptionalInput<string>("Unknown");
+    contact.firstName = readOptionalInput<string>();
     cout << "Last Name: ";
-    contact.lastName = readOptionalInput<string>("Unknown");
-    cout << "Gender (1 = male , 2 = female, 3 = other / unknown ): ";
-    contact.gender = readInput(1, 3);
+    contact.lastName = readOptionalInput<string>();
     cout << "Age ( 0 For unknown ): ";
     contact.age = readInput(0, 500);
     cout << "Address: ";
-    contact.address = readOptionalInput<string>("Unknown");
+    contact.address = readOptionalInput<string>();
     cout << "Email: ";
-    contact.email = readOptionalInput<string>("Unknown");
+    contact.email = readOptionalInput<string>();
     cout << "Phone number: ";
-    contact.phoneNumber = readOptionalInput<string>("Unknown");
+    contact.phoneNumber = readOptionalInput<string>();
 
     return contact;
 }

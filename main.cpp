@@ -74,7 +74,7 @@ int main(void)
                 ContactController::showSingleContact(subInput);
                 logger("userInput", "enter what info do you want to edit.");
                 logger("userInput", "pass empty input to not edit anything");
-                logger("userInput", " 1- First name     2- Last name    3- Gender     4- Address      5- Email       6- Phone Number");
+                logger("userInput", " 1- First name     2- Last name    3- Address      4- Email       5- Phone Number");
                 int userSelection;
                 userSelection = DisplayController::readInput(1, 6);
                 // This is a dirty and lazy way to do it. But since there is no repetition and we only use this logic in one place, it's fine
@@ -85,8 +85,8 @@ int main(void)
                 {
                     logger("userInput", "Enter new firstName: ");
                     string newFirstName;
-                    newFirstName = DisplayController::readOptionalInput<string>(NULL);
-                    if (newFirstName != "")
+                    newFirstName = DisplayController::readOptionalInput<string>();
+                    if (newFirstName != "NOINPUT")
                     {
                         ContactController::editContactField(subInput, "LASTNAME", newFirstName);
                     }
@@ -113,21 +113,6 @@ int main(void)
                 }
                 case 3:
                 {
-                    logger("userInput", "Enter new gender (UNKNOWN, MALE, FEMALE, OTHER) : ");
-                    string newGender;
-                    newGender = DisplayController::readOptionalInput<string>("UNSET");
-                    if (newGender == "UNKNOWN" || newGender == "MALE" || newGender == "FEMALE" || newGender == "OTHER")
-                    {
-                        ContactController::editContactField(subInput, "GENDER", newGender);
-                    }
-                    else
-                    {
-                        logger("info", "No change made, either no input was provided or invalid selection");
-                    }
-                    break;
-                }
-                case 4:
-                {
                     logger("userInput", "Enter new address : ");
                     string newAddress;
                     newAddress = DisplayController::readInput(0, 3);
@@ -141,6 +126,37 @@ int main(void)
                     }
                     break;
                 }
+                case 4:
+                {
+                    logger("userInput", "Enter new email: ");
+                    string newEmail;
+                    newEmail = DisplayController::readOptionalInput<string>(NULL);
+                    if (newEmail != "")
+                    {
+                        ContactController::editContactField(subInput, "EMAIL", newEmail);
+                    }
+                    else
+                    {
+                        logger("info", "No change made");
+                    }
+                    break;
+                }
+                case 5:
+                {
+                    logger("userInput", "Enter new phoneNumber: ");
+                    string newPhoneNumber;
+                    newPhoneNumber = DisplayController::readOptionalInput<string>(NULL);
+                    if (newPhoneNumber != "")
+                    {
+                        ContactController::editContactField(subInput, "PHONENUMBER", newPhoneNumber);
+                    }
+                    else
+                    {
+                        logger("info", "No change made");
+                    }
+                    break;
+                }
+
                 default:
                     break;
                 }

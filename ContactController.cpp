@@ -26,7 +26,7 @@ static int singleContactCB(void *NotUsed, int argc, char **argv, char **azColNam
 }
 static int contactCountCB(void *NotUsed, int argc, char **argv, char **azColName)
 {
-    logger("info", "Contact count: " + stoi(argv[0]));
+    logger("info", "Contact count: " + std::to_string(stoi(argv[0])));
     ContactController::dbSize = stoi(argv[0]);
     return 0;
 }
@@ -50,7 +50,6 @@ void ContactController::initDatabase()
                       "FIRSTNAME     TEXT    			NOT NULL,"
                       "LASTNAME		TEXT    			NOT NULL,"
                       "AGE			INTEGER     			NOT NULL,"
-                      "GENDER		INTEGER     			NOT NULL,"
                       "ADDRESS		CHAR(50),"
                       "EMAIL			CHAR(50),"
                       "PHONENUMBER	TEXT		 		NOT NULL);";
@@ -89,12 +88,11 @@ void ContactController::readDBSize()
 }
 void ContactController::addContact(ContactType contact)
 {
-    string sqlQuery = "INSERT INTO CONTACTS (FIRSTNAME,LASTNAME,AGE,GENDER,ADDRESS,EMAIL,PHONENUMBER) "
+    string sqlQuery = "INSERT INTO CONTACTS (FIRSTNAME,LASTNAME,AGE,ADDRESS,EMAIL,PHONENUMBER) "
                       "VALUES (\"" +
                       contact.firstName +
                       "\",\"" + contact.lastName +
                       "\",\"" + to_string(contact.age) +
-                      "\",\"" + to_string(contact.gender) +
                       "\",\"" + contact.address +
                       "\",\"" + contact.email +
                       "\",\"" + contact.phoneNumber + "\");";
@@ -137,7 +135,6 @@ void ContactController::updateContact(int id, ContactType newContent)
     string sqlQuery = "UPDATE CONTACTS SET FIRSTNAME = \"" + newContent.firstName +
                       "\", LASTNAME = \"" + newContent.lastName +
                       "\", AGE = \"" + to_string(newContent.age) +
-                      "\", GENDER = \"" + to_string(newContent.age) +
                       "\", ADDRESS = \"" + to_string(newContent.age) +
                       "\", EMAIL = \"" + to_string(newContent.age) +
                       "\", PHONENUMBER = \"" + to_string(newContent.age) + "\" WHERE ID = " + to_string(id) + ";";
