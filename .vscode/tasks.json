@@ -3,18 +3,18 @@
     {
       "type": "cppbuild",
       "label": "C/C++: g++ build active file",
-      "command": "/usr/bin/g++",
+      "command": "g++",
       "args": [
         "-fdiagnostics-color=always",
         "-g",
-        "${fileDirname}/Utils.cpp",
-        "${fileDirname}/ContactController.cpp",
-        "${fileDirname}/DisplayController.cpp",
-        "${fileDirname}/main.cpp",
+        "Utils.cpp",
+        "ContactController.cpp",
+        "DisplayController.cpp",
+        "main.cpp",
         "-lsqlite3",
-        "-I/home/navid/Dev/ContactCLI",
+        "-I{fileDirname}",
         "-o",
-        "${fileDirname}/build/main"
+        "build/main"
       ],
       "options": {
         "cwd": "${fileDirname}"
